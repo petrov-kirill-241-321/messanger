@@ -1,7 +1,7 @@
 {
   "name": "my-app-kamasutra",
   "version": "0.1.0",
-  "homepage": "https://petrov-kirill-241-321.github.io",
+  "homepage": "https://petrov-kirill-241-321.github.io/messanger",
   "private": true,
   "dependencies": {
     "axios": "^1.7.9",

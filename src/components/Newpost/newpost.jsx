@@ -7,15 +7,18 @@ import {
   state,
 } from "../../redux/profilePage";
 import { store } from "../../redux/redux-store";
+import { useSelector } from "react-redux";
 
-export const NewPost = (props) => {
+export const NewPost = ({ dispatch }) => {
   // debugger;
+  let text = useSelector((state) => state.profilePage.newPost.text);
+
   function newPostWrite() {
-    return store.dispatch(newPostWriteActionCreate());
+    return dispatch(newPostWriteActionCreate());
   }
 
   function addPost() {
-    return store.dispatch(addPostActionCreate());
+    return dispatch(addPostActionCreate());
   }
 
   return (
@@ -23,7 +26,7 @@ export const NewPost = (props) => {
       <div className="newpost__wrapper container">
         <h1 className="newpost__title">Добавить новый пост</h1>
         <textarea
-          value={store.getState().profilePage.newPost.text}
+          value={text}
           className="post"
           onInput={newPostWrite}
         ></textarea>

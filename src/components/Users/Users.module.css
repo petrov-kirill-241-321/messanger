@@ -1,0 +1,9 @@
+.active {
+  border: 3px solid green;
+}
+
+.image {
+  width: 100px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+}

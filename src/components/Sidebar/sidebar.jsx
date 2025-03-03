@@ -1,5 +1,5 @@
 import React from "react";
-import { NavLink, Route, BrowserRouter, Routes } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import s from "../Sidebar/sidebar.module.css";
 
 const SidebarItem = (props) => {

@@ -10,15 +10,16 @@ import {
 import { Messages } from "./Messages";
 import { store } from "../../redux/redux-store";
 import { useSelector, useDispatch } from "react-redux";
+import { withAuthRedirect } from "../../hoc/withAuthRedirect";
 
-const Icon = (props) => {
+const Icon = ({ name, idUser }) => {
   // debugger;
   return (
     <li className={s.item}>
       <img src={avatar} alt="" className={s.image} />
       <div>
-        <NavLink to={`/${props.idUser}`}>
-          <h4 className={s.title}>{props.name}</h4>
+        <NavLink to={`/${idUser}`}>
+          <h4 className={s.title}>{name}</h4>
         </NavLink>
         <p className={s.lastmessage}>{}</p>
       </div>
@@ -26,13 +27,13 @@ const Icon = (props) => {
   );
 };
 
-const Message = (props) => {
+const Message = ({ time, message }) => {
   // debugger;
 
   return (
     <li className="message received">
-      <span className={s.times}>{props.time}</span>
-      <p>{props.message}</p>
+      <span className={s.times}>{time}</span>
+      <p>{message}</p>
     </li>
   );
 };
@@ -40,9 +41,7 @@ const Message = (props) => {
 export const MessagesContainer = () => {
   // debugger;
   const dispatch = useDispatch();
-  const users = useSelector((state) => {
-    return state.dialogsPage.users;
-  });
+  const users = useSelector((state) => state.dialogsPage.users);
   const messages = useSelector((state) => state.dialogsPage.messages);
   let dialogsPage = useSelector((state) => state.dialogsPage);
   let newMessageBody = dialogsPage.newMessageBody;
@@ -72,3 +71,4 @@ export const MessagesContainer = () => {
     />
   );
 };
+export default withAuthRedirect(MessagesContainer);

@@ -1,45 +1,73 @@
-import React from "react";
+import React, { useState } from "react";
+import s from "./Users.module.css";
+import { unFollowAC, followAC } from "../../redux/usersPage";
+import initialImage from "../../image-ava/avatar.jpg";
+import { Preloader } from "../Preloader/Preloader";
+import { NavLink } from "react-router-dom";
 
-import { followAC, unFollowAC } from "../../redux/usersPage";
+export function Users({
+  users,
+  pageCount,
+  currentPage,
+  changePage,
+  pages,
+  dispatch,
+  isLoading,
+  followedUser,
+  unFollowedUser,
+  isToggleFollowingProgress,
+}) {
+  // debugger;
 
-// export function User(props) {
-//   // debugger;
-//   return (
-//     <div>
-//       <h3>{props.user.name}</h3>
-//       {/* <img src="" alt="avatarka" /> */}
-//       <p className="discription">{props.user.location.country}</p>
-//       <p className="discription">{props.user.location.city}</p>
-//       <button
-//         onClick={`${
-//           props.user.follow
-//             ? props.dispatch(followAC())
-//             : props.dispatch(unFollowAC())
-//         }`}
-//       >{`${props.user.follow ? "unfollow" : "follow"}`}</button>
-//     </div>
-//   );
-// }
-
-export function Users(props) {
-  //   debugger;
-  let usersElements = props.users.map((user) => {
+  let usersElements = users.map((user) => {
     return (
-      <div>
+      <div key={user.id}>
         <h3>{user.name}</h3>
-        {/* <img src="" alt="avatarka" /> */}
-        <p className="discription">{user.location.country}</p>
-        <p className="discription">{user.location.city}</p>
+        {user.photos.small ? (
+          <NavLink to={`/profile/${user.id}`}>
+            <img src={user.photos.small} className={s.image} alt="avatarka" />
+          </NavLink>
+        ) : (
+          <NavLink to={`/profile/${user.id}`}>
+            <img src={initialImage} className={s.image} alt="avatarka" />
+          </NavLink>
+        )}
+
         <button
-          onClick={() =>
-            user.follow
-              ? props.dispatch(unFollowAC(user.id))
-              : props.dispatch(followAC(user.id))
-          }
-        >{`${user.follow ? "unfollow" : "follow"}`}</button>
+          disabled={isToggleFollowingProgress.includes(user.id)}
+          onClick={() => {
+            if (user.followed) {
+              unFollowedUser(user.id);
+            } else {
+              followedUser(user.id);
+            }
+          }}
+        >
+          {user.followed ? "Unfollow" : "Follow"}
+        </button>
       </div>
-      // <User user={user} dispatch={props.dispatch} />
     );
   });
-  return <section className="container">{usersElements}</section>;
+
+  return (
+    <section className="container">
+      {isLoading ? (
+        <Preloader />
+      ) : (
+        <div>
+          <p className="pages">
+            {pages.map((page) => (
+              <button
+                className={currentPage === page ? s.active : ""}
+                onClick={() => changePage(page)}
+              >
+                {page}
+              </button>
+            ))}
+          </p>
+          <div>{usersElements}</div>
+        </div>
+      )}
+    </section>
+  );
 }

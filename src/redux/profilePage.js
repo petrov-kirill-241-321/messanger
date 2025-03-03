@@ -1,9 +1,11 @@
 const ADD_POST = "ADD-POST";
 const NEW_POST_WRITE = "NEW-POST-WRITE";
+const SET_NEW_STATUS = "SET_NEW_STATUS";
 
 const initialState = {
   myPosts: [],
   newPost: { id: 1, text: "", likes: 0 },
+  status: "",
 };
 
 export function profileReducer(state = initialState, action) {
@@ -36,6 +38,10 @@ export function profileReducer(state = initialState, action) {
       };
 
       return { ...state, newPost: { ...newPost } };
+
+    case SET_NEW_STATUS:
+      return { ...state, ...action.status };
+
     default:
       return state;
   }
@@ -47,4 +53,8 @@ export function newPostWriteActionCreate() {
 
 export function addPostActionCreate() {
   return { type: ADD_POST };
+}
+
+export function setNewStatus(status) {
+  return { type: SET_NEW_STATUS, status };
 }

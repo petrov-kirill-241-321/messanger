@@ -5,13 +5,16 @@
   height: 100vh;
   text-align: center;
   padding-block: 20px;
-  background-color: #000000a8;
   color: white;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   font-size: 18px;
 }
 .item {
   margin-bottom: 20px;
+}
+
+.link {
+  color: white;
 }
 
 .link:hover {

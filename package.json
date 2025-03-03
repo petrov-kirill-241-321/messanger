@@ -1,19 +1,24 @@
 {
   "name": "my-app-kamasutra",
   "version": "0.1.0",
+  "homepage": "https://petrov-kirill-241-321.github.io/messanger",
   "private": true,
   "dependencies": {
     "axios": "^1.7.9",
     "cra-template": "1.2.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
+    "react-hook-form": "^7.54.2",
     "react-redux": "^9.2.0",
     "react-router-dom": "^7.1.5",
     "react-scripts": "5.0.1",
     "redux": "^5.0.1",
+    "redux-thunk": "^3.1.0",
     "web-vitals": "^4.2.4"
   },
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
@@ -36,5 +41,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "gh-pages": "^6.3.0"
   }
 }
